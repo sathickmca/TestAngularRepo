@@ -1,0 +1,19 @@
+<section class="product-container">
+  <h2>Product List</h2>
+  <button type="button" (click)="loadProducts()" [disabled]="loading()">
+    Refresh products
+  </button>
+
+  <p *ngIf="loading()">Loading products…</p>
+  <p *ngIf="error()" class="error">Error: {{ error() }}</p>
+
+  <ul *ngIf="products()?.length">
+    <li *ngFor="let product of products()">
+      <strong>{{ product.name }}</strong>
+      <span *ngIf="product.price !== undefined"> - {{ product.price | currency }}</span>
+      <p *ngIf="product.description">{{ product.description }}</p>
+    </li>
+  </ul>
+
+  <p *ngIf="!loading() && !error() && !products()?.length">No products found.</p>
+</section>
